@@ -19,8 +19,8 @@ describe Anagram, '#word_diff' do
     end
     
     it "return the correct word difference" do
-        word = "mnop"
+        word = "xyyx"
         anagram = Anagram.new(word)
-        expect(anagram.word_diff()).to eq(2)
+        expect(anagram.word_diff()).to eq(0)
     end
 end
