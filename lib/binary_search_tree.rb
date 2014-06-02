@@ -39,6 +39,15 @@ class BinarySearchTree
         @root.value
     end
 
+    def height
+        return 0 if @root.left.nil? && @root.right.nil?
+
+        left_h = left_height(0, @root.left)
+        right_h = right_height(0, @root.right)
+        left_h > right_h ? left_h : right_h
+    end
+
+
     private
         def search_for_node(tnode, node)
             return nil if tnode.nil?
@@ -125,4 +134,18 @@ class BinarySearchTree
                 preorder(list, node.right)
             end
         end
+
+        def left_height(value, node)
+            return value.to_i if node.nil?
+            
+            value += 1
+            left_height(value, node.left)
+        end
+        
+        def right_height(value, node)
+            return value if node.nil?
+            value += 1
+            right_height(value, node.right)
+        end
+
 end

@@ -3,13 +3,22 @@
 require_relative '../lib/binary_search_tree'
 
 describe BinarySearchTree, '#initialize' do
+    before do
+        @bst = BinarySearchTree.new(2)
+        @bst.insert(1)
+        @bst.insert(3)
+        @bst.insert(5)
+        @bst.insert(4)
+        @bst.insert(9)
+    end
+    
     it 'identify a null tree' do
-        bst = BinarySearchTree.new(2)
-        expect(bst.root_value).to eql(2)
+        expect(@bst.root_value).to eql(2)
     end
 
-    # it 'find the height of the tree' do
-    # end
+    it 'find the height of the tree' do
+        expect(@bst.height()).to eql(3)
+    end
 end
 
 
