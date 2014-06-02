@@ -1,12 +1,12 @@
 # binary_search_tree.rb
 # From http://codingjunkie.net/binary-search-tree-programming-praxis-solution/
-require 'node'
+require_relative 'node'
 
 class BinarySearchTree
     attr_reader :root
 
     def initialize(root = nil)
-        @root = root
+        @root = Node.new(root)
     end
 
     def search(value)
@@ -26,10 +26,22 @@ class BinarySearchTree
         inorder(vals, @root)
         vals
     end
+    
+    def pre_order_list
+        vals = []
+        preorder(vals, @root)
+        p vals.join(' ')
+        vals
+    end
+
+    def root_value
+        raise ArgumentError, "root is not created" unless @root.is_a? Node
+        @root.value
+    end
 
     private
         def search_for_node(tnode, node)
-            return nil if tnode.nil
+            return nil if tnode.nil?
 
             if tnode == node
                 tnode = node
@@ -64,7 +76,7 @@ class BinarySearchTree
             end
             tnode
         end
-        
+
         def remove(node)
             if node.left.nil? && node.right.nil?
                 node = nil
@@ -106,4 +118,11 @@ class BinarySearchTree
             end
         end
 
+        def preorder(list, node)
+            unless node.nil?
+                list.push(node.value)
+                preorder(list, node.left)
+                preorder(list, node.right)
+            end
+        end
 end
