@@ -26,7 +26,7 @@ class BinarySearchTree
         inorder(vals, @root)
         vals
     end
-    
+
     def pre_order_list
         vals = []
         preorder(vals, @root)
@@ -135,13 +135,21 @@ class BinarySearchTree
             end
         end
 
+        def postorder(list, node)
+            unless node.nil?
+                postorder(list, node.left)
+                postorder(list, node.right)
+                list.push(node.value)
+            end
+        end
+
         def left_height(value, node)
             return value.to_i if node.nil?
-            
+
             value += 1
             left_height(value, node.left)
         end
-        
+
         def right_height(value, node)
             return value if node.nil?
             value += 1
