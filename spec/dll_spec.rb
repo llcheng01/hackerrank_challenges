@@ -65,4 +65,17 @@ describe DLL, '#traverse' do
         @dll.delete(1)
         expect(@dll.print).to eql("2 3")
    end
+
+   it 'able to iterate to find the size of the linked list' do
+        @dll.insert(3)
+        @dll.insert(1)
+        @dll.insert(2)
+        expect(@dll.size()).to eql(3)
+        @dll.insert(4)
+        expect(@dll.size()).to eql(4)
+        @dll.delete(2)
+        @dll.delete(1)
+        expect(@dll.size()).to eql(2)
+        expect(@dll.print).to eql("4 3")
+   end
 end

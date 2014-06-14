@@ -49,6 +49,10 @@ class DLL
         end
     end
 
+    def size
+        accumulate(@head, 0)
+    end
+
     def print
         return "empty" if @head.nil?
         result = []
@@ -65,6 +69,12 @@ class DLL
             return nil if node.nil?
             return node if node.value == value
             find_node(node.child, value)
+        end
+
+        def accumulate(node, value)
+            return value if node.nil?
+            value += 1
+            accumulate(node.child, value)
         end
 
     class Node
