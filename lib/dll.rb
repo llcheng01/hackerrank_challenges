@@ -1,7 +1,7 @@
 # Double Linked List
 
 class DLL
-    attr_reader :head
+    attr_reader :head, :tail
 
     def initialize
         # raise (ArgumentError.new 'Linked List must be initialized by an array') unless arr.is_a?(Array)
@@ -13,28 +13,38 @@ class DLL
     end
     
     # insert to the front
-    def insert(value)
+    def insert_first(value)
         if (@head.nil?)
             @head = Node.new(value)
+            @tail = @head
         else
-            temp = @head
+            previous = @head
             @head = Node.new(value)
-            temp.parent = @head
-            @head.child = temp
+            previous.parent = @head
+            @head.child = previous
+        end
+    end
+
+    def insert_last(value)
+        if (@head.nil?)
+            @head = Node.new(value)
+            @tail = @head
+        else
+            previous = @tail
+            # previous
+            @tail = Node.new(value)
+            previous.child = @tail
+            @tail.parent = previous
         end
     end
 
     def delete_first
         return nil if empty?
-        temp = @head
-        @head = temp.child
-        temp
-    end
-
-    def find(value)
-        return nil if empty?
-        found = find_node(@head, value)
-        found
+        previous = @head
+        # last node
+        @tail = previous.child if (previous.child.nil?)
+        @head = previous.child
+        previous
     end
 
     def delete(value)
@@ -49,6 +59,12 @@ class DLL
         end
     end
 
+    def find(value)
+        return nil if empty?
+        found = find_node(@head, value)
+        found
+    end
+    
     def size
         accumulate(@head, 0)
     end
