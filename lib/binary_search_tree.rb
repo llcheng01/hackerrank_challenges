@@ -1,6 +1,7 @@
 # binary_search_tree.rb
 # From http://codingjunkie.net/binary-search-tree-programming-praxis-solution/
 require_relative 'node'
+require_relative 'queue'
 
 class BinarySearchTree
     attr_reader :root
@@ -30,7 +31,13 @@ class BinarySearchTree
     def pre_order_list
         vals = []
         preorder(vals, @root)
-        p vals.join(' ')
+        vals
+    end
+
+    def post_order_list
+        vals = []
+        postorder(vals, @root)
+        puts "#{vals.inspect}"
         vals
     end
 
@@ -39,12 +46,34 @@ class BinarySearchTree
         @root.value
     end
 
-    def height
-        return 0 if @root.left.nil? && @root.right.nil?
+    def min
+        return 0 if @root.left.nil?
+        left_h = left_height(@root.left)
+        left_h.value
+    end
 
-        left_h = left_height(0, @root.left)
-        right_h = right_height(0, @root.right)
-        left_h > right_h ? left_h : right_h
+    def max
+        return 0 if @root.right.nil?
+        right_h = right_height(@root.right)
+        right_h.value
+    end
+
+    def bfs
+        vals = []
+        return vals if @root.nil? || @root.value.nil?
+        q = Queue.new
+        q.insert(@root)
+        while (!q.empty?)
+            current = q.remove()
+            vals << current.value.value
+            q.insert(current.value.left) unless current.value.left.nil?
+            q.insert(current.value.right) unless current.value.right.nil?
+        end
+        vals
+    end
+    
+    def max_height
+        height(@root, 1)
     end
 
 
@@ -143,17 +172,21 @@ class BinarySearchTree
             end
         end
 
-        def left_height(value, node)
-            return value.to_i if node.nil?
-
-            value += 1
-            left_height(value, node.left)
+        def left_height(node)
+            return node if node.left.nil?
+            left_height(node.left)
         end
 
-        def right_height(value, node)
-            return value if node.nil?
-            value += 1
-            right_height(value, node.right)
+        def right_height(node)
+            return node if node.right.nil?
+            right_height(node.right)
         end
 
+        def height(node, count)
+            left_h = count
+            right_h = count
+            left_h = height(node.left, left_h + 1) unless node.left.nil?
+            right_h = height(node.right, right_h + 1) unless node.right.nil?
+            left_h > right_h ? left_h : right_h
+        end
 end
