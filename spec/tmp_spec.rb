@@ -6,4 +6,4 @@ describe DLL, '#traverse' do
     end
     it 'can move backward and forward' do
     end
-end
+ed
