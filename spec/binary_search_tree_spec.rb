@@ -123,3 +123,20 @@ end
 
 describe BinarySearchTree, '#least_common_accessor' do
 end
+
+describe BinarySearchTree, "#floor" do
+    before do
+        @bst = BinarySearchTree.new('s')
+        @bst.insert('e')
+        @bst.insert('x')
+        @bst.insert('a')
+        @bst.insert('r')
+        @bst.insert('c')
+        @bst.insert('h')
+        @bst.insert('m')
+    end
+
+    it "find floor of the given node" do
+      expect(@bst.floor('g')).to eql('e')
+    end
+end

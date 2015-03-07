@@ -76,6 +76,12 @@ class BinarySearchTree
         height(@root, 1)
     end
 
+    def floor(key)
+      x = find_floor(@root, Node.new(key))
+      return nil if x.nil?
+      return x.value
+    end
+
 
     private
         def search_for_node(tnode, node)
@@ -188,5 +194,17 @@ class BinarySearchTree
             left_h = height(node.left, left_h + 1) unless node.left.nil?
             right_h = height(node.right, right_h + 1) unless node.right.nil?
             left_h > right_h ? left_h : right_h
+        end
+
+        def find_floor(node, other)
+          return nil if node.nil?
+          return node if node == other
+          return find_floor(node.left, other) if node > other
+          right = find_floor(node.right, other)
+          if right.nil?
+            return node
+          else
+            return right
+          end
         end
 end
