@@ -37,7 +37,6 @@ class BinarySearchTree
     def post_order_list
         vals = []
         postorder(vals, @root)
-        puts "#{vals.inspect}"
         vals
     end
 
@@ -82,6 +81,11 @@ class BinarySearchTree
       return x.value
     end
 
+    def keys(lo, hi)
+      q = Queue.new
+      find_keys(@root, q, Node.new(lo), Node.new(hi))
+      q
+    end
 
     private
         def search_for_node(tnode, node)
@@ -205,6 +209,14 @@ class BinarySearchTree
             return node
           else
             return right
+          end
+        end
+
+        def find_keys(node, queue, lo, hi)
+          unless node.nil?
+            find_keys(node.left, queue, lo, hi) if node > lo
+            queue.insert(node.value) if node > lo && node < hi
+            find_keys(node.right, queue, lo, hi) if node < hi
           end
         end
 end

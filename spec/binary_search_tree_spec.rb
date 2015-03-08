@@ -140,3 +140,24 @@ describe BinarySearchTree, "#floor" do
       expect(@bst.floor('g')).to eql('e')
     end
 end
+
+describe BinarySearchTree, "#keys" do
+    before do
+        @bst = BinarySearchTree.new('s')
+        @bst.insert('e')
+        @bst.insert('x')
+        @bst.insert('a')
+        @bst.insert('r')
+        @bst.insert('c')
+        @bst.insert('h')
+        @bst.insert('m')
+        @bst.insert('l')
+        @bst.insert('p')
+    end
+
+    it "find range between two nodes" do
+      result = @bst.keys('f', 't')
+      # dll insert is sorted!!
+      expect(result.print()).to eql "h l m p r s"
+    end
+end
