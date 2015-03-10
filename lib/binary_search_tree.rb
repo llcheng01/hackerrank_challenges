@@ -87,7 +87,26 @@ class BinarySearchTree
       q
     end
 
+    def isBST?()
+      checkBST(@root, min(), max())
+    end
+
     private
+        def checkBST(node, min, max)
+          return true if node.nil?
+
+          # min <= current < max
+          # Cannot work with node.value <= min, equal return false right away with moving to nul children
+          # recursive do left first than right
+          return false if ( node.value < min || node.value > max)
+          
+          if (!checkBST(node.left, min, node.value) || !checkBST(node.right, node.value, max))
+            return false
+          end
+
+          return true
+        end
+
         def search_for_node(tnode, node)
             return nil if tnode.nil?
 

@@ -161,3 +161,22 @@ describe BinarySearchTree, "#keys" do
       expect(result.print()).to eql "h l m p r s"
     end
 end
+
+describe BinarySearchTree, "#isBST?" do
+    before do
+        @bst = BinarySearchTree.new('s')
+        @bst.insert('e')
+        @bst.insert('x')
+        @bst.insert('a')
+        @bst.insert('r')
+        @bst.insert('c')
+        @bst.insert('h')
+        @bst.insert('m')
+        @bst.insert('l')
+        @bst.insert('p')
+    end
+
+    it "verify if tree is BST" do
+      expect(@bst.isBST?).to eql true
+    end
+end
