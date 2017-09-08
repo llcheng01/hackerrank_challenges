@@ -2,11 +2,14 @@ require 'spec_helper'
 
 describe MyArray do
   describe '#find_2nd_max' do
-    before do
-      @my_arr = MyArray.new [3, 14, 5, 6, 2, 1, 11, 20, 16]
-    end
     it 'should find the second largest number in an array' do
-      expect(@my_arr.find_2nd_max).to eq 16
+      @my_arr1 = MyArray.new [3, 14, 5, 6, 2, 1, 11, 20, 16]
+      expect(@my_arr1.find_2nd_max).to eq 16
+    end
+
+    it 'should find second largest number in consecutive array' do
+        @my_arr2 = MyArray.new [1, 2, 3, 4]
+        expect(@my_arr2.find_2nd_max).to eq 3 
     end
   end
   

@@ -9,8 +9,12 @@ class MyArray
     max = @data.first
     second = @data[1]
     @data.each do |d|
-      max = d if max < d
-      second = d if max > d && second < d
+        if max < d
+            second = max
+            max = d
+        elsif max > d && second < d
+            second = d
+        end
     end
     second
   end

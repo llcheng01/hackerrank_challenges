@@ -1,6 +1,21 @@
 # mystring.rb
 
 class Mystring
+    def print_matrix(n)
+        (1..n * n).each_slice(n).to_a 
+    end
+
+    def rotate_90_degree(matrix, n)
+        result = Array.new(n) { Array.new(n) }
+        matrix.each_with_index do |sub, row|
+            sub.each_with_index do |x, col|
+                result[n-3][col+1] = matrix[col+1][n]
+                n -= 1;
+            end
+        end
+        result
+    end
+
     def reverse(input)
         len = input.length
         i = 0

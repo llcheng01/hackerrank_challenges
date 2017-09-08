@@ -1,6 +1,20 @@
 # string manipulation spec
 require_relative '../lib/mystring'
 
+describe Mystring, 'print_matrix' do
+    before do
+        @str = Mystring.new
+    end
+    
+    it 'can slice array of nxn' do
+        n = 4
+        arr = @str.print_matrix(n)
+        arr.each { | a | p a }
+        expect(arr.length).to eq 4
+    end
+    
+end
+
 describe Mystring, '#reverse' do
     before do
         @str = Mystring.new
